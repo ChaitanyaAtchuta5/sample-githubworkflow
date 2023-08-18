@@ -33,7 +33,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Fe
         id: fe2
-        if: steps.fe1.outcome != 'success'
+        if: always() && steps.fe1.outcome != 'success'
         run: echo fe2 && echo '${{ steps.fe1.outcome }}'
 
       # Runs a set of commands using the runners shell
