@@ -30,7 +30,7 @@ jobs:
         id: fe1
         timeout-minutes: 1
         continue-on-error: true
-        run: sleep 600 && exit 1
+        run: echo hello
 
       # Runs a set of commands using the runners shell
       - name: Fe
