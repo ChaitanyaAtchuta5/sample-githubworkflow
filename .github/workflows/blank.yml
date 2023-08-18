@@ -47,5 +47,5 @@ jobs:
 
       - name: art
         id: art
-        if: always() && (steps.fe1.outcome == 'success' || steps.fe2.outcome == 'success' || steps.fe2.outcome == 'success')
+        if: always() && (steps.fe1.outcome == 'success' || steps.fe2.outcome == 'success' || steps.fe3.outcome == 'success')
         run: echo art && echo '${{ steps.fe1.outcome }}' && echo '${{ steps.fe2.outcome }}' && echo '${{ steps.fe3.outcome }}'
