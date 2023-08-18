@@ -30,19 +30,22 @@ jobs:
         id: fe1
         timeout-minutes: 1
         continue-on-error: true
-        run: echo hello
+        run: echo fe1 && sleep 600
 
       # Runs a set of commands using the runners shell
       - name: Fe
         id: fe2
+        continue-on-error: true
         if: always() && steps.fe1.outcome != 'success'
-        run: echo fe2 && echo '${{ steps.fe1.outcome }}'
+        run: echo fe2 && echo '${{ steps.fe1.outcome }}' && exit 1
 
       # Runs a set of commands using the runners shell
       - name: Fe
         id: fe3
-        run: echo fe3
+        if: always() && (steps.fe1.outcome != 'success' && steps.fe2.outcome != 'success')
+        run: echo fe3 && echo '${{ steps.fe1.outcome }}' && echo '${{ steps.fe2.outcome }}'
 
       - name: art
         id: art
-        run: echo art
+        if: always() && (steps.fe1.outcome == 'success' || steps.fe2.outcome == 'success' || steps.fe2.outcome == 'success')
+        run: echo art && echo '${{ steps.fe1.outcome }}' && echo '${{ steps.fe2.outcome }}' && echo '${{ steps.fe3.outcome }}'
