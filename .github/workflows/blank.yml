@@ -43,9 +43,9 @@ jobs:
       - name: Fe
         id: fe3
         if: always() && (steps.fe1.outcome != 'success' && steps.fe2.outcome != 'success')
-        run: echo fe3 && echo '${{ steps.fe1.outcome }}' && echo '${{ steps.fe2.outcome }}' && echo '${{ steps.fe1.conclusion }}' && echo '${{ steps.fe2.conclusion }}'
+        run: echo fe3 && echo '${{ steps.fe1.outcome }}' && echo '${{ steps.fe2.outcome }}' && echo '${{ steps.fe1.conclusion }}' && echo '${{ steps.fe2.conclusion }}' && exit 1
 
       - name: art
         id: art
-        if: always() && (steps.fe1.outcome == 'success' || steps.fe2.outcome == 'success' || steps.fe3.outcome == 'success')
+        if: always() && (${{ steps.fe1.outcome }} == 'success' || ${{ steps.fe2.outcome }} == 'success' || ${{ steps.fe3.outcome }} == 'success')
         run: echo art && echo '${{ steps.fe1.outcome }}' && echo '${{ steps.fe2.outcome }}' && echo '${{ steps.fe3.outcome }}' && echo '${{ steps.fe1.conclusion }}' && echo '${{ steps.fe2.conclusion }}' && echo '${{ steps.fe3.conclusion }}'
